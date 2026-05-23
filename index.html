@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Doceria</title>
+<style>
+:root {
+  --gold: #C8943A;
+  --gold-light: #E8BC6A;
+  --gold-dim: rgba(200,148,58,0.18);
+  --cream: #FAF6F0;
+  --cream-dark: #F0E8DC;
+  --brown: #2C1A0E;
+  --brown-mid: #4A2E18;
+  --brown-soft: rgba(44,26,14,0.06);
+  --text: #2C1A0E;
+  --text-mid: #7A5C42;
+  --text-soft: #A8896C;
+  --border: rgba(200,148,58,0.22);
+  --border-soft: rgba(44,26,14,0.08);
+  --white: #ffffff;
+  --success-bg: rgba(72,160,80,0.1);
+  --success-text: #2d7a33;
+  --warn-bg: rgba(200,100,30,0.1);
+  --warn-text: #8B4513;
+  --danger-text: #B84040;
+  --danger-border: rgba(184,64,64,0.3);
+  --info-bg: rgba(200,148,58,0.12);
+  --info-text: #8B6820;
+  --shadow: 0 4px 24px rgba(44,26,14,0.10);
+  --shadow-sm: 0 2px 10px rgba(44,26,14,0.07);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── HERO HEADER ─────────────────────────────────────── */
+.header {
+  position: relative;
+  height: 130px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 32px 18px;
+}
+
+.header-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(20,8,2,0.55) 0%, rgba(44,26,14,0.72) 100%),
+    url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1400&q=80') center/cover no-repeat;
+  z-index: 0;
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  width: 100%;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  line-height: 1;
+}
+
+.logo-sub {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--gold-light);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 3px;
+}
+
+.logo-icon {
+  font-size: 32px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+}
+
+.alert-pill {
+  font-size: 11.5px;
+  padding: 5px 13px;
+  border-radius: 20px;
+  background: rgba(200,100,30,0.85);
+  color: #fff;
+  font-weight: 600;
+  margin-left: auto;
+  border: 1px solid rgba(255,200,100,0.3);
+  backdrop-filter: blur(4px);
+  letter-spacing: 0.02em;
+}
+
+/* ── TABS ────────────────────────────────────────────── */
+.tabs {
+  background: var(--brown);
+  display: flex;
+  gap: 0;
+  padding: 0 24px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+
+.tab {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 13px 18px;
+  font-size: 12.5px;
+  font-weight: 500;
+  font-family: 'Jost', sans-serif;
+  color: rgba(255,255,255,0.5);
+  border-bottom: 2px solid transparent;
+  transition: all 0.18s;
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.tab:hover { color: rgba(255,255,255,0.85); }
+.tab.active { color: var(--gold-light); border-bottom-color: var(--gold); }
+
+/* ── CONTENT AREA ────────────────────────────────────── */
+.page-hero {
+  position: relative;
+  height: 90px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  margin-bottom: 0;
+}
+
+.page-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.38);
+  z-index: 0;
+  transition: opacity 0.3s;
+}
+
+.page-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(44,26,14,0.85) 0%, rgba(44,26,14,0.3) 100%);
+  z-index: 1;
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.page-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+}
+
+.content {
+  padding: 24px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ── BUTTONS ─────────────────────────────────────────── */
+.btn-primary {
+  background: var(--gold);
+  color: #fff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: 'Jost', sans-serif;
+  transition: all 0.15s;
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 10px rgba(200,148,58,0.35);
+}
+.btn-primary:hover { background: #B8832A; box-shadow: 0 4px 16px rgba(200,148,58,0.45); transform: translateY(-1px); }
+
+.btn-ghost {
+  background: none;
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-mid);
+  font-family: 'Jost', sans-serif;
+  transition: all 0.15s;
+}
+.btn-ghost:hover { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); }
+
+.btn-danger {
+  background: none;
+  border: 1px solid var(--danger-border);
+  padding: 5px 9px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--danger-text);
+  font-family: 'Jost', sans-serif;
+  transition: all 0.15s;
+}
+.btn-danger:hover { background: rgba(184,64,64,0.08); }
+
+/* ── METRICS ─────────────────────────────────────────── */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.metric {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.metric::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--gold), var(--gold-light));
+}
+
+.metric-label {
+  font-size: 11px;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.metric-value {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ── WARN BOX ────────────────────────────────────────── */
+.warn-box {
+  background: var(--warn-bg);
+  border: 1px solid rgba(200,100,30,0.25);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+.warn-title { font-size: 13px; font-weight: 600; color: var(--warn-text); margin-bottom: 7px; }
+.warn-item { font-size: 12px; color: var(--warn-text); padding: 2px 0; opacity: 0.85; }
+
+/* ── TABLE ───────────────────────────────────────────── */
+.table-head {
+  display: grid;
+  padding: 7px 14px;
+  font-size: 10.5px;
+  color: var(--text-soft);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.table-row {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  padding: 11px 14px;
+  margin-bottom: 5px;
+  display: grid;
+  align-items: center;
+  font-size: 13px;
+  transition: all 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+.table-row:hover { border-color: var(--gold); box-shadow: 0 4px 16px rgba(200,148,58,0.12); }
+
+/* ── BADGES ──────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 20px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.badge-ok { background: var(--success-bg); color: var(--success-text); }
+.badge-low { background: var(--warn-bg); color: var(--warn-text); }
+.badge-margin { background: var(--info-bg); color: var(--info-text); }
+
+/* ── RECIPE CARDS ────────────────────────────────────── */
+.recipe-card {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.15s;
+}
+.recipe-card:hover { border-color: var(--gold); box-shadow: 0 6px 24px rgba(200,148,58,0.14); transform: translateY(-1px); }
+.recipe-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; margin-bottom: 2px; color: var(--text); }
+.recipe-sub { font-size: 12px; color: var(--text-soft); }
+.recipe-price { font-size: 16px; font-weight: 600; color: var(--gold); }
+.recipe-cost { font-size: 12px; color: var(--text-soft); margin-bottom: 2px; }
+
+.tag {
+  display: inline-block;
+  padding: 3px 9px;
+  background: var(--cream-dark);
+  border-radius: 20px;
+  font-size: 11px;
+  color: var(--text-mid);
+  margin: 2px;
+  border: 1px solid var(--border-soft);
+}
+
+/* ── PRODUCTIONS TABLE ───────────────────────────────── */
+.prod-empty {
+  color: var(--text-soft);
+  font-size: 14px;
+  padding: 50px 0;
+  text-align: center;
+  font-style: italic;
+}
+
+.price-table .table-row { grid-template-columns: 2fr 90px 90px 70px 110px; }
+.price-sale { font-weight: 600; color: var(--gold); }
+.price-profit { font-size: 11px; color: var(--text-soft); }
+
+/* ── SECTION HEADER ──────────────────────────────────── */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ── LAST PRODUCTIONS BOX ────────────────────────────── */
+.prods-box {
+  background: var(--white);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+}
+.prods-box-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-mid);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.prod-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border-soft);
+  align-items: center;
+}
+.prod-row:last-child { border-bottom: none; }
+.prod-row-name { font-weight: 500; }
+.prod-row-meta { font-size: 12px; color: var(--text-soft); }
+
+/* ── MODAL ───────────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20,8,2,0.6);
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding: 60px 16px 40px;
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  background: var(--white);
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  padding: 24px;
+  width: 100%;
+  max-width: 460px;
+  height: fit-content;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(20,8,2,0.35);
+  animation: modalIn 0.22s ease;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  color: var(--text-soft);
+  line-height: 1;
+  transition: color 0.15s;
+}
+.close-btn:hover { color: var(--text); }
+
+.form-group { margin-bottom: 14px; }
+
+.form-label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-soft);
+  margin-bottom: 5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.form-input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(200,148,58,0.12);
+  background: var(--white);
+}
+
+.form-select {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  transition: border-color 0.15s;
+}
+.form-select:focus { outline: none; border-color: var(--gold); }
+
+.form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.ing-item-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 28px;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.cost-preview {
+  font-size: 12.5px;
+  color: var(--text-mid);
+  padding: 10px 12px;
+  background: var(--gold-dim);
+  border-radius: var(--radius-sm);
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  font-weight: 500;
+}
+
+/* ── DECORATIVE DIVIDER ──────────────────────────────── */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 20px 0;
+  opacity: 0.4;
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+
+<div class="header">
+  <div class="header-bg"></div>
+  <div class="header-content">
+    <span class="logo-icon">🎂</span>
+    <div>
+      <span class="logo">Doceria</span>
+      <span class="logo-sub">Gestão artesanal</span>
+    </div>
+    <span id="alert-pill" style="display:none" class="alert-pill"></span>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="navigate('dashboard')">Dashboard</button>
+  <button class="tab" onclick="navigate('ingredientes')">Ingredientes</button>
+  <button class="tab" onclick="navigate('receitas')">Receitas</button>
+  <button class="tab" onclick="navigate('producao')">Produção</button>
+  <button class="tab" onclick="navigate('precos')">Preços</button>
+</div>
+
+<div id="page-hero" class="page-hero" style="display:none">
+  <div id="page-hero-bg" class="page-hero-bg"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <h1 id="page-hero-title" class="page-hero-title"></h1>
+    <div id="page-hero-action"></div>
+  </div>
+</div>
+
+<div class="content" id="content"></div>
+<div id="modal-root"></div>
+</div>
+
+<script>
+const fmt = n => 'R$ ' + Number(n).toFixed(2).replace('.', ',');
+const fmtN = n => Number(n).toFixed(2).replace('.', ',');
+
+const PAGE_BG = {
+  dashboard:    'https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=1200&q=70',
+  ingredientes: 'https://images.unsplash.com/photo-1556909211-36987daf7b4d?w=1200&q=70',
+  receitas:     'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=1200&q=70',
+  producao:     'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=1200&q=70',
+  precos:       'https://images.unsplash.com/photo-1551879400-111a9087cd86?w=1200&q=70',
+};
+
+const PAGE_TITLE = {
+  dashboard:    'Visão Geral',
+  ingredientes: 'Ingredientes',
+  receitas:     'Fichas Técnicas',
+  producao:     'Produção',
+  precos:       'Precificação',
+};
+
+let state = {
+  tab: 'dashboard',
+  ingredients: [
+    {id:1,name:'Farinha de trigo',unit:'kg',qty:5,minQty:2,cost:4.50},
+    {id:2,name:'Açúcar',unit:'kg',qty:3,minQty:1,cost:3.80},
+    {id:3,name:'Manteiga',unit:'kg',qty:2,minQty:0.5,cost:18.00},
+    {id:4,name:'Ovos',unit:'un',qty:30,minQty:12,cost:0.80},
+    {id:5,name:'Leite condensado',unit:'lata',qty:10,minQty:4,cost:5.50},
+    {id:6,name:'Chocolate em pó',unit:'kg',qty:1.5,minQty:0.5,cost:22.00},
+    {id:7,name:'Creme de leite',unit:'cx',qty:8,minQty:3,cost:3.20},
+    {id:8,name:'Fermento',unit:'g',qty:200,minQty:50,cost:0.05},
+  ],
+  recipes: [
+    {id:1,name:'Bolo de Chocolate',yield:1,unit:'bolo',margin:60,items:[
+      {ingId:1,amt:0.3},{ingId:2,amt:0.2},{ingId:3,amt:0.1},{ingId:4,amt:3},{ingId:6,amt:0.1},{ingId:8,amt:10}
+    ]},
+    {id:2,name:'Brigadeiro',yield:40,unit:'un',margin:120,items:[
+      {ingId:5,amt:1},{ingId:6,amt:0.04},{ingId:3,amt:0.01}
+    ]},
+    {id:3,name:'Bolo de Baunilha',yield:1,unit:'bolo',margin:55,items:[
+      {ingId:1,amt:0.3},{ingId:2,amt:0.2},{ingId:3,amt:0.1},{ingId:4,amt:3},{ingId:7,amt:1},{ingId:8,amt:10}
+    ]},
+  ],
+  productions: [],
+  nextId: 100
+};
+
+function recipeCost(recipe) {
+  return recipe.items.reduce((s, item) => {
+    const ing = state.ingredients.find(i => i.id === item.ingId);
+    return s + (ing ? ing.cost * item.amt : 0);
+  }, 0);
+}
+
+function salePrice(cost, margin) { return cost * (1 + margin / 100); }
+
+function navigate(tab) {
+  state.tab = tab;
+  document.querySelectorAll('.tab').forEach(t => {
+    t.classList.remove('active');
+    if (t.textContent.toLowerCase().includes(tab) ||
+        (tab==='precos' && t.textContent==='Preços') ||
+        (tab==='dashboard' && t.textContent==='Dashboard') ||
+        (tab==='producao' && t.textContent==='Produção') ||
+        (tab==='ingredientes' && t.textContent==='Ingredientes') ||
+        (tab==='receitas' && t.textContent==='Receitas')) {
+      t.classList.add('active');
+    }
+  });
+  render();
+}
+
+function closeModal() { document.getElementById('modal-root').innerHTML = ''; }
+
+function updateAlert() {
+  const low = state.ingredients.filter(i => i.qty <= i.minQty);
+  const pill = document.getElementById('alert-pill');
+  if (low.length > 0) { pill.style.display = ''; pill.textContent = '⚠ ' + low.length + ' item' + (low.length>1?'s':'') + ' em falta'; }
+  else pill.style.display = 'none';
+}
+
+function updatePageHero(tab) {
+  const hero = document.getElementById('page-hero');
+  const bg = document.getElementById('page-hero-bg');
+  const title = document.getElementById('page-hero-title');
+  const action = document.getElementById('page-hero-action');
+  if (tab === 'dashboard') { hero.style.display = 'none'; return; }
+  hero.style.display = '';
+  bg.style.backgroundImage = `url('${PAGE_BG[tab]}')`;
+  title.textContent = PAGE_TITLE[tab];
+  const btns = {
+    ingredientes: `<button class="btn-primary" onclick="openIngModal()">+ Adicionar</button>`,
+    receitas:     `<button class="btn-primary" onclick="openRecModal()">+ Nova receita</button>`,
+    producao:     `<button class="btn-primary" onclick="openProdModal()">+ Registrar</button>`,
+    precos:       '',
+  };
+  action.innerHTML = btns[tab] || '';
+}
+
+function renderDashboard() {
+  const low = state.ingredients.filter(i => i.qty <= i.minQty);
+  const stockVal = state.ingredients.reduce((s,i) => s + i.qty * i.cost, 0);
+  const today = new Date().toLocaleDateString('pt-BR');
+  const todayProds = state.productions.filter(p => p.date === today).length;
+  let html = `
+    <div class="section-header">
+      <h2 class="section-title">Visão Geral</h2>
+      <button class="btn-primary" onclick="openProdModal()">+ Registrar produção</button>
+    </div>
+    <div class="metrics">
+      <div class="metric"><div class="metric-label">Valor em estoque</div><div class="metric-value" style="font-size:18px">${fmt(stockVal)}</div></div>
+      <div class="metric"><div class="metric-label">Ingredientes</div><div class="metric-value">${state.ingredients.length}</div></div>
+      <div class="metric"><div class="metric-label">Receitas</div><div class="metric-value">${state.recipes.length}</div></div>
+      <div class="metric"><div class="metric-label">Produção hoje</div><div class="metric-value">${todayProds}</div></div>
+    </div>`;
+  if (low.length > 0) {
+    html += `<div class="warn-box"><div class="warn-title">⚠ Itens com estoque baixo ou crítico</div>`;
+    low.forEach(i => { html += `<div class="warn-item">• ${i.name} — ${fmtN(i.qty)} ${i.unit} (mínimo: ${i.minQty} ${i.unit})</div>`; });
+    html += `</div>`;
+  }
+  if (state.productions.length > 0) {
+    html += `<div class="prods-box"><div class="prods-box-title">Últimas produções</div>`;
+    [...state.productions].reverse().slice(0,5).forEach(p => {
+      const rec = state.recipes.find(r => r.id === p.recipeId);
+      const cost = rec ? recipeCost(rec) * p.qty : 0;
+      html += `<div class="prod-row">
+        <span class="prod-row-name">${p.recipeName}</span>
+        <span class="prod-row-meta">${p.qty}× &nbsp;·&nbsp; ${fmt(cost)} &nbsp;·&nbsp; ${p.date}</span>
+      </div>`;
+    });
+    html += `</div>`;
+  } else {
+    html += `<div style="padding:40px 0;text-align:center;color:var(--text-soft);font-size:13px;font-style:italic">Nenhuma produção ainda. Clique em "Registrar produção" para começar.</div>`;
+  }
+  return html;
+}
+
+function renderIngredientes() {
+  let html = `
+    <div class="table-head" style="grid-template-columns:2fr 60px 70px 70px 100px 60px 120px">
+      <span>Nome</span><span>Un.</span><span>Qtd.</span><span>Mín.</span><span>Custo/un</span><span>Status</span><span>Ações</span>
+    </div>`;
+  state.ingredients.forEach(ing => {
+    const low = ing.qty <= ing.minQty;
+    html += `<div class="table-row" style="grid-template-columns:2fr 60px 70px 70px 100px 60px 120px">
+      <span style="font-weight:500">${ing.name}</span>
+      <span style="color:var(--text-soft)">${ing.unit}</span>
+      <span>${fmtN(ing.qty)}</span>
+      <span style="color:var(--text-soft)">${ing.minQty}</span>
+      <span>${fmt(ing.cost)}</span>
+      <span class="badge ${low?'badge-low':'badge-ok'}">${low?'baixo':'ok'}</span>
+      <span style="display:flex;gap:4px">
+        <button class="btn-ghost" onclick="openStockModal(${ing.id})">+est</button>
+        <button class="btn-ghost" onclick="openIngModal(${ing.id})">editar</button>
+        <button class="btn-danger" onclick="deleteIng(${ing.id})">×</button>
+      </span>
+    </div>`;
+  });
+  const total = state.ingredients.reduce((s,i)=>s+i.qty*i.cost,0);
+  html += `<div style="text-align:right;font-size:12px;color:var(--text-soft);margin-top:10px">Valor total em estoque: <strong style="color:var(--text)">${fmt(total)}</strong></div>`;
+  return html;
+}
+
+function renderReceitas() {
+  let html = '';
+  state.recipes.forEach(rec => {
+    const cost = recipeCost(rec);
+    const price = salePrice(cost, rec.margin);
+    const tags = rec.items.map(item => {
+      const ing = state.ingredients.find(i => i.id === item.ingId);
+      return ing ? `<span class="tag">${ing.name} ${fmtN(item.amt)}${ing.unit}</span>` : '';
+    }).join('');
+    html += `<div class="recipe-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div class="recipe-name">${rec.name}</div>
+          <div class="recipe-sub">Rende ${rec.yield} ${rec.unit}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="text-align:right">
+            <div class="recipe-cost">Custo: ${fmt(cost)}</div>
+            <div class="recipe-price">${fmt(price)}</div>
+          </div>
+          <button class="btn-ghost" onclick="openRecModal(${rec.id})">editar</button>
+          <button class="btn-danger" onclick="deleteRec(${rec.id})">×</button>
+        </div>
+      </div>
+      <div style="margin-top:10px;border-top:1px solid var(--border-soft);padding-top:8px">${tags}</div>
+      <div style="margin-top:6px;font-size:11px;color:var(--text-soft)">Margem ${rec.margin}% — Lucro: <strong style="color:var(--gold)">${fmt(price-cost)}</strong> por lote</div>
+    </div>`;
+  });
+  return html;
+}
+
+function renderProducao() {
+  let html = '';
+  if (state.productions.length === 0) {
+    html += `<div class="prod-empty">Nenhuma produção registrada ainda.</div>`;
+  } else {
+    html += `<div class="table-head" style="grid-template-columns:2fr 80px 90px 90px">
+      <span>Receita</span><span>Lotes</span><span>Data</span><span>Custo</span>
+    </div>`;
+    [...state.productions].reverse().forEach(p => {
+      const rec = state.recipes.find(r => r.id === p.recipeId);
+      const cost = rec ? recipeCost(rec) * p.qty : 0;
+      html += `<div class="table-row" style="grid-template-columns:2fr 80px 90px 90px">
+        <span style="font-weight:500">${p.recipeName}</span>
+        <span>${p.qty}×</span>
+        <span style="color:var(--text-soft)">${p.date}</span>
+        <span style="color:var(--gold);font-weight:500">${fmt(cost)}</span>
+      </div>`;
+    });
+  }
+  return html;
+}
+
+function renderPrecos() {
+  let html = `
+    <p style="font-size:13px;color:var(--text-soft);margin-bottom:18px">Preços calculados automaticamente com base no custo dos ingredientes e margem de lucro de cada receita.</p>
+    <div class="price-table">
+    <div class="table-head" style="grid-template-columns:2fr 90px 90px 70px 110px">
+      <span>Receita</span><span>Rendimento</span><span>Custo</span><span>Margem</span><span>Preço venda</span>
+    </div>`;
+  state.recipes.forEach(rec => {
+    const cost = recipeCost(rec);
+    const price = salePrice(cost, rec.margin);
+    html += `<div class="table-row" style="grid-template-columns:2fr 90px 90px 70px 110px">
+      <span style="font-weight:500">${rec.name}</span>
+      <span style="color:var(--text-soft)">${rec.yield} ${rec.unit}</span>
+      <span>${fmt(cost)}</span>
+      <span><span class="badge badge-margin">${rec.margin}%</span></span>
+      <div><div class="price-sale">${fmt(price)}</div><div class="price-profit">lucro ${fmt(price-cost)}</div></div>
+    </div>`;
+  });
+  html += `</div>`;
+  return html;
+}
+
+function render() {
+  updateAlert();
+  updatePageHero(state.tab);
+  const content = document.getElementById('content');
+  if (state.tab === 'dashboard') content.innerHTML = renderDashboard();
+  else if (state.tab === 'ingredientes') content.innerHTML = renderIngredientes();
+  else if (state.tab === 'receitas') content.innerHTML = renderReceitas();
+  else if (state.tab === 'producao') content.innerHTML = renderProducao();
+  else if (state.tab === 'precos') content.innerHTML = renderPrecos();
+}
+
+// ── Ingredient Modal ────────────────────────────────────────
+function openIngModal(id) {
+  const ing = id ? state.ingredients.find(i => i.id === id) : null;
+  document.getElementById('modal-root').innerHTML = `
+    <div class="overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">${ing ? 'Editar' : 'Novo'} ingrediente</span>
+        <button class="close-btn" onclick="closeModal()">×</button>
+      </div>
+      <div class="form-group"><label class="form-label">Nome do ingrediente</label>
+        <input class="form-input" id="f-name" value="${ing?ing.name:''}" placeholder="Ex: Farinha de trigo">
+      </div>
+      <div class="form-grid-2">
+        <div class="form-group"><label class="form-label">Unidade</label>
+          <select class="form-select" id="f-unit">
+            ${['kg','g','l','ml','un','lata','cx','pacote'].map(u=>`<option ${(ing?ing.unit:'')==u?'selected':''}>${u}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Custo por unidade (R$)</label>
+          <input class="form-input" type="number" step="0.01" id="f-cost" value="${ing?ing.cost:0}">
+        </div>
+        <div class="form-group"><label class="form-label">Quantidade atual</label>
+          <input class="form-input" type="number" step="0.1" id="f-qty" value="${ing?ing.qty:0}">
+        </div>
+        <div class="form-group"><label class="form-label">Quantidade mínima</label>
+          <input class="form-input" type="number" step="0.1" id="f-min" value="${ing?ing.minQty:0}">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="closeModal()">Cancelar</button>
+        <button class="btn-primary" onclick="saveIng(${id||0})">Salvar</button>
+      </div>
+    </div></div>`;
+}
+
+function saveIng(id) {
+  const name=document.getElementById('f-name').value.trim();
+  const unit=document.getElementById('f-unit').value;
+  const cost=+document.getElementById('f-cost').value;
+  const qty=+document.getElementById('f-qty').value;
+  const minQty=+document.getElementById('f-min').value;
+  if (!name) return;
+  if (id) { state.ingredients = state.ingredients.map(i => i.id===id ? {...i,name,unit,cost,qty,minQty} : i); }
+  else { state.ingredients.push({id:++state.nextId,name,unit,cost,qty,minQty}); }
+  closeModal(); render();
+}
+
+function deleteIng(id) {
+  if (confirm('Remover este ingrediente?')) { state.ingredients = state.ingredients.filter(i => i.id !== id); render(); }
+}
+
+// ── Stock Modal ─────────────────────────────────────────────
+function openStockModal(id) {
+  const ing = state.ingredients.find(i => i.id === id);
+  document.getElementById('modal-root').innerHTML = `
+    <div class="overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">Entrada de estoque</span>
+        <button class="close-btn" onclick="closeModal()">×</button>
+      </div>
+      <p style="font-size:13px;color:var(--text-soft);margin-bottom:14px">
+        <strong style="color:var(--text)">${ing.name}</strong> — Atual: ${fmtN(ing.qty)} ${ing.unit}
+      </p>
+      <div class="form-group"><label class="form-label">Quantidade a adicionar (${ing.unit})</label>
+        <input class="form-input" type="number" step="0.1" id="f-stock-amt" value="0" min="0">
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="closeModal()">Cancelar</button>
+        <button class="btn-primary" onclick="saveStock(${id})">Adicionar</button>
+      </div>
+    </div></div>`;
+}
+
+function saveStock(id) {
+  const amt = +document.getElementById('f-stock-amt').value;
+  state.ingredients = state.ingredients.map(i => i.id===id ? {...i, qty: Math.round((i.qty + amt)*100)/100} : i);
+  closeModal(); render();
+}
+
+// ── Recipe Modal ─────────────────────────────────────────────
+let recFormItems = [];
+function openRecModal(id) {
+  const rec = id ? state.recipes.find(r => r.id === id) : null;
+  recFormItems = rec ? rec.items.map(i=>({...i})) : [];
+  renderRecModal(id, rec);
+}
+
+function renderRecModal(id, rec) {
+  const itemRows = recFormItems.map((item,idx) => {
+    const opts = state.ingredients.map(i=>`<option value="${i.id}" ${i.id===item.ingId?'selected':''}>${i.name} (${i.unit})</option>`).join('');
+    return `<div class="ing-item-row">
+      <select class="form-select" style="font-size:12px" onchange="updateRecItem(${idx},'ingId',this.value)">${opts}</select>
+      <input class="form-input" type="number" step="0.001" value="${item.amt}" style="font-size:12px;padding:7px" onchange="updateRecItem(${idx},'amt',this.value)">
+      <button onclick="removeRecItem(${idx})" style="background:none;border:none;cursor:pointer;color:var(--danger-text);font-size:18px">×</button>
+    </div>`;
+  }).join('');
+  const previewCost = recFormItems.reduce((s,item) => {
+    const ing = state.ingredients.find(i => i.id === +item.ingId);
+    return s + (ing ? ing.cost * +item.amt : 0);
+  }, 0);
+  const margin = rec ? rec.margin : 60;
+  document.getElementById('modal-root').innerHTML = `
+    <div class="overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">${rec ? 'Editar' : 'Nova'} receita</span>
+        <button class="close-btn" onclick="closeModal()">×</button>
+      </div>
+      <div class="form-group"><label class="form-label">Nome da receita</label>
+        <input class="form-input" id="f-rname" value="${rec?rec.name:''}" placeholder="Ex: Bolo de Cenoura">
+      </div>
+      <div class="form-grid-3">
+        <div class="form-group"><label class="form-label">Rendimento</label>
+          <input class="form-input" type="number" id="f-ryield" value="${rec?rec.yield:1}">
+        </div>
+        <div class="form-group"><label class="form-label">Unidade</label>
+          <input class="form-input" id="f-runit" value="${rec?rec.unit:'un'}" placeholder="bolo, un...">
+        </div>
+        <div class="form-group"><label class="form-label">Margem (%)</label>
+          <input class="form-input" type="number" id="f-rmargin" value="${margin}" onchange="refreshRecPreview()">
+        </div>
+      </div>
+      <div style="font-size:11px;font-weight:600;color:var(--text-soft);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px">Ingredientes</div>
+      <div id="rec-items">${itemRows}</div>
+      <button class="btn-ghost" style="font-size:12px;margin-bottom:12px" onclick="addRecItem()">+ Adicionar ingrediente</button>
+      <div class="cost-preview" id="rec-preview">
+        Custo: ${fmt(previewCost)} → Preço sugerido: ${fmt(salePrice(previewCost, margin))}
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="closeModal()">Cancelar</button>
+        <button class="btn-primary" onclick="saveRec(${id||0})">Salvar receita</button>
+      </div>
+    </div></div>`;
+}
+
+function updateRecItem(idx, field, val) {
+  recFormItems[idx][field] = +val;
+  refreshRecPreview();
+}
+function removeRecItem(idx) { recFormItems.splice(idx,1); refreshRecItems(); }
+function addRecItem() {
+  const firstIng = state.ingredients[0];
+  if (firstIng) recFormItems.push({ingId:firstIng.id, amt:0});
+  refreshRecItems();
+}
+function refreshRecItems() {
+  const id = parseInt(document.querySelector('[onclick*="saveRec"]')?.getAttribute('onclick').match(/\d+/)?.[0]);
+  const rows = recFormItems.map((item,idx) => {
+    const opts = state.ingredients.map(i=>`<option value="${i.id}" ${i.id===item.ingId?'selected':''}>${i.name} (${i.unit})</option>`).join('');
+    return `<div class="ing-item-row">
+      <select class="form-select" style="font-size:12px" onchange="updateRecItem(${idx},'ingId',this.value)">${opts}</select>
+      <input class="form-input" type="number" step="0.001" value="${item.amt}" style="font-size:12px;padding:7px" onchange="updateRecItem(${idx},'amt',this.value)">
+      <button onclick="removeRecItem(${idx})" style="background:none;border:none;cursor:pointer;color:var(--danger-text);font-size:18px">×</button>
+    </div>`;
+  }).join('');
+  document.getElementById('rec-items').innerHTML = rows;
+  refreshRecPreview();
+}
+function refreshRecPreview() {
+  const cost = recFormItems.reduce((s,item) => {
+    const ing = state.ingredients.find(i => i.id === +item.ingId);
+    return s + (ing ? ing.cost * +item.amt : 0);
+  }, 0);
+  const margin = +document.getElementById('f-rmargin')?.value || 60;
+  const el = document.getElementById('rec-preview');
+  if (el) el.textContent = 'Custo: ' + fmt(cost) + ' → Preço sugerido: ' + fmt(salePrice(cost, margin));
+}
+function saveRec(id) {
+  const name=document.getElementById('f-rname').value.trim();
+  const yld=+document.getElementById('f-ryield').value;
+  const unit=document.getElementById('f-runit').value;
+  const margin=+document.getElementById('f-rmargin').value;
+  if(!name) return;
+  const items=recFormItems.map(i=>({ingId:+i.ingId,amt:+i.amt}));
+  if(id){ state.recipes=state.recipes.map(r=>r.id===id?{...r,name,yield:yld,unit,margin,items}:r); }
+  else { state.recipes.push({id:++state.nextId,name,yield:yld,unit,margin,items}); }
+  closeModal(); render();
+}
+function deleteRec(id) {
+  if(confirm('Remover esta receita?')){ state.recipes=state.recipes.filter(r=>r.id!==id); render(); }
+}
+
+// ── Production Modal ─────────────────────────────────────────
+function openProdModal() {
+  if(!state.recipes.length){ alert('Cadastre ao menos uma receita primeiro.'); return; }
+  document.getElementById('modal-root').innerHTML = `
+    <div class="overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">Registrar produção</span>
+        <button class="close-btn" onclick="closeModal()">×</button>
+      </div>
+      <div class="form-group"><label class="form-label">Receita</label>
+        <select class="form-select" id="f-prec" onchange="updateProdPreview()">
+          ${state.recipes.map(r=>`<option value="${r.id}">${r.name}</option>`).join('')}
+        </select>
+      </div>
+      <div class="form-group"><label class="form-label">Quantidade de lotes</label>
+        <input class="form-input" type="number" min="1" id="f-pqty" value="1" onchange="updateProdPreview()">
+      </div>
+      <div class="cost-preview" id="prod-preview"></div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="closeModal()">Cancelar</button>
+        <button class="btn-primary" onclick="saveProd()">Confirmar produção</button>
+      </div>
+    </div></div>`;
+  updateProdPreview();
+}
+function updateProdPreview() {
+  const recId=+document.getElementById('f-prec')?.value;
+  const qty=+document.getElementById('f-pqty')?.value||1;
+  const rec=state.recipes.find(r=>r.id===recId);
+  const el=document.getElementById('prod-preview');
+  if(rec&&el){ el.textContent='Custo total: '+fmt(recipeCost(rec)*qty)+' — O estoque será atualizado automaticamente.'; }
+}
+function saveProd() {
+  const recId=+document.getElementById('f-prec').value;
+  const qty=+document.getElementById('f-pqty').value||1;
+  const rec=state.recipes.find(r=>r.id===recId);
+  if(!rec) return;
+  state.ingredients=state.ingredients.map(ing=>{
+    const item=rec.items.find(it=>it.ingId===ing.id);
+    if(!item) return ing;
+    return {...ing, qty: Math.max(0, Math.round((ing.qty - item.amt*qty)*1000)/1000)};
+  });
+  state.productions.push({id:++state.nextId,recipeId:rec.id,recipeName:rec.name,qty,date:new Date().toLocaleDateString('pt-BR')});
+  closeModal();
+  state.tab='producao';
+  document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active');if(t.textContent==='Produção')t.classList.add('active');});
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
